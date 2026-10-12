@@ -1,0 +1,362 @@
+/* ===== WARNA & UKURAN UTAMA ===== */
+:root {
+  --s: 56px;
+  --navy: #061a45;
+  --blue: #0d3a9e;
+  --gold: #ffd43b;
+  --ok: #37b24d;
+  color-scheme: dark;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+*, *:before, *:after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: radial-gradient(ellipse at 30% 20%, #14439f, var(--navy) 70%);
+  color: #fff;
+  font-family: "Trebuchet MS", system-ui, sans-serif;
+  overflow: hidden;
+}
+
+#intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  background: radial-gradient(circle at 50% 40%, #1a52c4, #04122f 75%);
+  overflow: hidden;
+}
+
+/* ===== KARAKTER DI PINGGIR INTRO ===== */
+.intro-character {
+  position: absolute;
+  bottom: 0;
+  height: 75%;
+  max-height: 500px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+#char-left {
+  left: 0px;
+}
+
+#char-right {
+  right: 0px;
+  transform: scaleX(-1);
+}
+
+#intro small,
+#intro h1,
+#intro h2,
+#intro button {
+  position: relative;
+  z-index: 2;
+}
+
+#intro small {
+  letter-spacing: .4em;
+  opacity: .85;
+  font-size: clamp(14px, 2.2vw, 28px);
+}
+
+#intro h1 {
+  font-size: clamp(90px, 22vw, 300px);
+  margin: 0;
+  line-height: 1;
+  letter-spacing: .08em;
+  color: var(--gold);
+  text-shadow: 0 0 30px #ffb70099, 0 6px 0 #a56a00;
+  animation: p 2s infinite;
+}
+
+#intro h2 {
+  font-size: clamp(20px, 4vw, 56px);
+  margin: 6px 0 28px;
+  padding: 6px 28px;
+  background: #fff;
+  color: var(--navy);
+  border-radius: 6px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+@keyframes p {
+  50% { transform: scale(1.05); }
+}
+
+/* ===== TOMBOL ===== */
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 18px;
+  font-weight: 700;
+  background: var(--gold);
+  color: var(--navy);
+}
+
+button.g {
+  background: #ffffff22;
+  color: #fff;
+}
+
+button.ok {
+  background: var(--ok);
+  color: #fff;
+}
+
+#go {
+  font-size: clamp(18px, 2.4vw, 30px);
+  padding: 14px 44px;
+}
+
+/* ===== TATA LETAK GAME ===== */
+#app {
+  display: flex;
+  gap: 16px;
+  height: 100%;
+  padding: 12px 16px;
+  position: relative;
+}
+
+/* ===== KARAKTER DI DALAM GAME ===== */
+#game-char {
+  position: absolute;
+  right: 20px;
+  bottom: 0px;
+  height: 45%;
+  max-height: 320px;
+  z-index: 5;
+  pointer-events: none;
+  transition: opacity 0.6s ease-in-out;
+}
+
+#left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#bar {
+  background: #fff;
+  color: var(--navy);
+  font-weight: 800;
+  letter-spacing: .2em;
+  padding: 4px 28px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  font-size: clamp(11px, 1.4vw, 20px);
+  text-transform: uppercase;
+}
+
+/* ===== PAPAN TTS ===== */
+#grid {
+  display: grid;
+  gap: 3px;
+}
+
+.c {
+  width: var(--s);
+  height: var(--s);
+  position: relative;
+  background: #fff;
+  color: var(--navy);
+  font-weight: 800;
+  font-size: calc(var(--s) * .58);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.c.e {
+  background: none;
+  cursor: default;
+}
+
+.c i {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  font-size: calc(var(--s) * .26);
+  font-style: normal;
+  color: #c92a2a;
+}
+
+.c.w {
+  background: var(--gold);
+}
+
+.c b {
+  opacity: 0;
+  transform: scale(.3);
+  transition: opacity .3s, transform .3s;
+}
+
+.c.v b {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===== EFEK JAWABAN SALAH ===== */
+.c.x {
+  background: #fa5252 !important;
+  color: #fff !important;
+  outline: 2px solid #ff8787;
+  animation: tetot .35s ease-in-out;
+}
+
+.c.x i {
+  color: #fff;
+}
+
+/* EFEK TETOT SAAT TOMBOL S DITEKAN */
+.c.tetot {
+  animation: efekTetot 0.45s ease-in-out;
+  background: #fa5252 !important;
+  color: white !important;
+  outline: 2px solid #ff8787;
+}
+
+.c.tetot i {
+  color: white;
+}
+
+@keyframes efekTetot {
+  0%, 100% {
+    transform: translateX(0);
+    background: #fa5252;
+  }
+  20%, 60% {
+    transform: translateX(-4px);
+    background: #ff8787;
+  }
+  40%, 80% {
+    transform: translateX(4px);
+    background: #fa5252;
+  }
+}
+
+/* ===== PANEL KANAN ===== */
+#side {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: auto;
+}
+
+.card {
+  background: #ffffff14;
+  border: 2px solid #ffffff44;
+  border-radius: 14px;
+  padding: 14px;
+}
+
+#cl {
+  font-size: clamp(16px, 1.9vw, 30px);
+  line-height: 1.35;
+}
+
+#cn {
+  color: var(--gold);
+  font-weight: 800;
+  margin-bottom: 6px;
+  letter-spacing: .05em;
+}
+
+#ex {
+  display: none;
+  margin-top: 10px;
+  padding: 10px;
+  border-left: 5px solid var(--ok);
+  background: #00000033;
+  font-size: clamp(14px, 1.5vw, 24px);
+}
+
+/* ===== NOMOR SOAL ===== */
+#chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip {
+  padding: 6px 10px;
+  background: #ffffff22;
+  color: #fff;
+  font-size: .9rem;
+}
+
+.chip.on {
+  outline: 3px solid var(--gold);
+}
+
+.chip.d {
+  background: var(--ok);
+}
+
+/* ===== PAPAN SKOR TIM ===== */
+#teams {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+}
+
+.t {
+  background: #00000040;
+  border-radius: 10px;
+  padding: 8px;
+  text-align: center;
+}
+
+.t span {
+  display: block;
+  font-weight: 700;
+  outline: none;
+}
+
+.t em {
+  font-style: normal;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--gold);
+}
+
+.t button {
+  padding: 2px 10px;
+  margin: 0 3px;
+  font-size: 1rem;
+}
+
+/* ===== TAMPILAN HP / LAYAR SEMPIT ===== */
+@media (max-width: 800px) {
+  #app {
+    flex-direction: column;
+    overflow: auto;
+  }
+
+  body {
+    overflow: auto;
+  }
+}

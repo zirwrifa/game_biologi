@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>WIB - Waktunya Indonesia Biologi</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- LAYAR PEMBUKA -->
+  <div id="intro">
+    <!-- Gambar Karakter Kiri & Kanan -->
+    <img id="char-left" class="intro-character" src="WhatsApp_Image_2026-10-12_at_13.54.30-removebg-preview.png" alt="Karakter Kiri">
+    <img id="char-right" class="intro-character" src="WhatsApp_Image_2026-10-12_at_13.54.30-removebg-preview.png" alt="Karakter Kanan">
+
+    <small>SELAMAT DATANG DI</small>
+    <h1>WIB</h1>
+    <h2>Waktunya Indonesia Biologi</h2>
+    <button id="go">MULAI ▶</button>
+  </div>
+
+  <!-- LAYAR GAME -->
+  <div id="app">
+
+    <!-- Karakter Dinamis di Dalam Game -->
+    <img id="game-char" src="WhatsApp_Image_2026-10-12_at_13.54.33-removebg-preview.png" alt="Karakter Game">
+
+    <!-- Kiri: papan TTS -->
+    <div id="left">
+      <div id="bar">Waktunya Indonesia Biologi</div>
+      <div id="grid"></div>
+    </div>
+
+    <!-- Kanan: soal, tombol, nomor, skor -->
+    <div id="side">
+      <div class="card">
+        <div id="cn">Pilih nomor soal</div>
+        <div id="cl">Klik nomor di bawah atau kotak di papan.</div>
+        <div id="ex"></div>
+      </div>
+
+      <div>
+        <button onclick="salah()" style="background:#fa5252;color:white">SALAH (S)</button>
+        <button onclick="hint()">💡 Petunjuk</button>
+        <button onclick="ans()" class="ok">✅ Jawaban</button>
+        <button class="g" onclick="rst()">Reset</button>
+        <button class="g" onclick="document.documentElement.requestFullscreen && document.documentElement.requestFullscreen()">⛶</button>
+      </div>
+
+      <div class="card" id="chips"></div>
+      <div id="teams"></div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
